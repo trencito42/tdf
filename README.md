@@ -1,9 +1,3 @@
-
-This server is powered by Plesk.
-
-Run the 'plesk login' command and log in by browsing either of the links received in the output.
-Use the 'plesk' command to manage the server. Run 'plesk help' for more info.
-
 # DollForum Platform Modernization
 
 DollForum is a long-running community platform with roughly 2.9 million forum posts, 119,000 registered accounts and 1.5 million attachments. Its primary forum shares a dedicated production server with DollHarem, DollAlbum, CoverDoll and several legacy or migration applications.
