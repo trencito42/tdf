@@ -1,12 +1,14 @@
 # Executive Summary
 
-[Project overview](../README.md) · [Roadmap](modernization-roadmap.md) · [Implementation plan](implementation-plan.md)
+[Owner decision brief](owner-decision-brief.md) · [Roadmap](modernization-roadmap.md) · [Implementation plan](implementation-plan.md)
 
 ## Operational position
 
 DollForum remains a viable platform with valuable content, established community workflows and extensive custom functionality. The immediate problem is not insufficient server capacity. Short production samples showed ample CPU and memory headroom. The principal risks come from unsupported software, shared-service coupling, a locking database backup and years of accumulated application-specific changes.
 
 The dedicated server hosts more than the main forum. DollHarem has a second phpBB forum and a gallery; DollAlbum has a large gallery; CoverDoll runs Drupal and Gallery 2. These applications share the web stack, database service, storage, backup system and operating system. A global runtime, database or network change intended for one site can therefore interrupt another.
+
+The initial inventory and assessment are complete. Cloudflare dashboard review, external artifact accessibility, isolated restore testing and direct backup-lock observation remain open. No production remediation has been performed under this project.
 
 ## Security position
 
@@ -20,7 +22,7 @@ Active PHP 5.6 and 7.4 runtimes are outside upstream support. Drupal 7 is also b
 
 ## Performance position
 
-The recurring nightly slowdown has a demonstrated cause. DollForum's main database is approximately 7 GiB and is dominated by MyISAM tables. During the nightly Plesk database dump, table locking overlaps with hundreds of PHP requests exceeding the configured 20-second slow threshold. This is repeatable across multiple nights.
+The recurring nightly slowdown has strong, repeated timing evidence. DollForum's main database is approximately 7 GiB and is dominated by MyISAM tables. During the nightly Plesk database dump, hundreds of PHP requests exceed the configured 20-second slow threshold. The same overlap appears across multiple nights. This strongly supports backup-related table locking as the cause, but lock state should still be captured directly before changing the backup method or storage engines.
 
 PHP-FPM is not the initiating bottleneck in that incident. Workers accumulate while waiting on MariaDB. Increasing worker counts would allow a larger queue and consume more memory without removing the lock.
 
@@ -59,10 +61,11 @@ Modernizing the current forum is more practical than rebuilding it. A rewrite wo
 
 ## Decision required
 
-Owners should approve three initial work packages independently:
+Owners should consider four initial approvals independently:
 
-1. containment and exposure assessment for backup artifacts in served directories;
-2. security containment for each phpBB forum;
-3. construction of isolated staging and a restore test.
+1. controlled containment and exposure assessment for backup artifacts in served directories;
+2. separate emergency security containment for each phpBB forum;
+3. construction of isolated staging and a restore test;
+4. read-only Cloudflare configuration and event review.
 
-Approval of these packages does not authorize application upgrades, database conversion, DNS changes or a reboot.
+Approval of these items does not authorize application upgrades, database conversion, PHP migration, DNS or firewall changes, Cloudflare rule deployment or a reboot.

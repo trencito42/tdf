@@ -1,8 +1,19 @@
 # Implementation Plan
 
-[Project overview](../README.md) · [Roadmap](modernization-roadmap.md) · [Validation and rollback](validation-and-rollback.md)
+[Owner decision brief](owner-decision-brief.md) · [Roadmap](modernization-roadmap.md) · [Validation and rollback](validation-and-rollback.md)
 
 Every package is currently **proposed**. None has production approval or implementation status.
+
+## Initial owner approvals
+
+The first decisions are deliberately narrow and independent:
+
+- **A — WP-01:** controlled backup-artifact containment and exposure assessment.
+- **B — WP-02A/B:** separate emergency phpBB containment for DollForum and DollHarem.
+- **C — WP-03:** isolated staging and restore validation.
+- **D — WP-10A:** read-only Cloudflare configuration and event review.
+
+These approvals do not authorize phpBB core upgrades, database conversion, PHP migration, application migration, Cloudflare/DNS changes or a server reboot. Those actions retain their own work packages and maintenance approvals.
 
 ## Work package summary
 
@@ -17,7 +28,7 @@ Every package is currently **proposed**. None has production approval or impleme
 | WP-07 Drupal migration | High | Planned cutover window | Required | Proposed |
 | WP-08 Gallery 2 migration | High | Planned cutover window | Required | Proposed |
 | WP-09 Database/backup modernization | High | Database maintenance window | Required with production-shaped data | Proposed |
-| WP-10 Cloudflare/origin controls | High | Staged DNS/rule changes | Configuration testing required | Proposed |
+| WP-10A/B Cloudflare review and later origin controls | High | None for review; staged disruption for later approved changes | Configuration review/testing required | Proposed |
 | WP-11 Operating-system maintenance | High | Full-server reboot window | Runbook rehearsal required | Proposed |
 | WP-12 Observability/capacity/cleanup | Medium/high | Mostly online; reloads or small task windows | Recommended for configuration changes | Proposed |
 
@@ -25,7 +36,7 @@ Every package is currently **proposed**. None has production approval or impleme
 
 - **Problem:** backup artifacts containing configuration material reside inside served directory trees.
 - **Scope:** affected production/test vhosts and any credentials present in the artifacts.
-- **Proposed change:** record hashes, ownership and retention intent; move artifacts to approved non-web storage or add a tested explicit deny rule; review access history.
+- **Proposed change:** record hashes, ownership and retention intent; relocate artifacts to approved non-web storage or add a tested explicit deny rule; review access history.
 - **Dependencies:** owner confirmation that the files are not the only recoverable copies; known backup/migration consumers.
 - **Expected outcome:** artifacts are not retrievable through the web tier.
 - **Main risk:** breaking an undocumented migration or backup workflow; deleting unique recovery data.
@@ -129,17 +140,17 @@ Every package is currently **proposed**. None has production approval or impleme
 - **Rollback:** restore the pre-change database before reopening writes; later rollback requires data reconciliation.
 - **Approval:** database maintenance-window approval.
 
-## WP-10 — Cloudflare and origin controls
+## WP-10A/B — Cloudflare review and later origin controls
 
 - **Problem:** proxy status and security policy differ by domain; the shared origin remains discoverable.
 - **Scope:** all zones, origin services and operational access paths.
-- **Proposed change:** export configuration; define per-zone proxy/TLS/WAF/cache policy; add origin authentication/restriction only after dependency mapping.
+- **Proposed change:** WP-10A exports and reviews configuration without mutation. A later WP-10B would define per-zone proxy/TLS/WAF/cache policy and add origin authentication/restriction only after dependency mapping and separate approval.
 - **Dependencies:** zone access, mail/Plesk/staging requirements and prior rule export.
-- **Expected outcome:** deliberate, documented edge policy and reduced origin bypass.
+- **Expected outcome:** first, an evidence-based description of current zone behavior; later, a deliberate edge policy and reduced origin bypass.
 - **Main risk:** blocking legitimate users, search engines, downloads or administrative services.
-- **Validation:** legitimate route matrix, attachment downloads, crawler behavior and direct-origin tests.
-- **Rollback:** prior rule export, DNS TTL plan and preserved management path.
-- **Approval:** Cloudflare and shared-network approval.
+- **Validation:** export completeness for WP-10A; legitimate route matrix, attachment downloads, crawler behavior and direct-origin tests for any later change.
+- **Rollback:** none required for the read-only review. Later changes require a prior rule export, DNS TTL plan and preserved management path.
+- **Approval:** D authorizes WP-10A only. WP-10B requires separate Cloudflare and shared-network approval.
 
 ## WP-11 — Operating-system maintenance
 

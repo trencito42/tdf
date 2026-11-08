@@ -1,6 +1,6 @@
 # Validation and Rollback
 
-[Project overview](../README.md) · [Implementation plan](implementation-plan.md) · [Performance](performance.md)
+[Owner decision brief](owner-decision-brief.md) · [Implementation plan](implementation-plan.md) · [Performance](performance.md)
 
 ## Change discipline
 
@@ -112,6 +112,8 @@ A successful backup job is only the beginning. A restore test should prove:
 
 Restores must not send email, run production cron or contact live integrations.
 
+No isolated restore meeting these criteria has yet been demonstrated under this project.
+
 ## Cross-site regression checks
 
 After any shared-service change, verify:
@@ -157,3 +159,5 @@ For each package, record:
 - remaining follow-up work.
 
 Until this record exists and acceptance criteria pass, the package remains in progress rather than complete.
+
+The initial assessment has no completed production package to record. Its remaining evidence tasks include external artifact accessibility, Cloudflare dashboard state, isolated restore and direct backup-lock observation.

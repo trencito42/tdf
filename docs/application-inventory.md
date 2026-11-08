@@ -1,8 +1,10 @@
 # Application Inventory
 
-[Project overview](../README.md) · [Platform overview](platform-overview.md) · [Roadmap](modernization-roadmap.md)
+[Owner decision brief](owner-decision-brief.md) · [Platform overview](platform-overview.md) · [Roadmap](modernization-roadmap.md)
 
 ## Production applications
+
+Classification is based on Plesk assignments, deployed metadata, database state and bounded recent access logs. It describes observed use, not owner-approved retention status.
 
 | Application | Deployed stack | Maintenance position | Important customization | Principal risk |
 |---|---|---|---|---|
@@ -73,3 +75,5 @@ These are not automatically safe to delete. Each requires an owner, retention pu
 - Every application depends on the same nginx, Apache, network and operating system.
 
 These dependencies are why application upgrades and infrastructure maintenance appear as separate work packages in the [implementation plan](implementation-plan.md).
+
+The inventory establishes scope; it is not a completed source, upload or access-control audit of every legacy application. Those targeted reviews remain proposed work.

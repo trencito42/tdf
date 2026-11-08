@@ -1,8 +1,8 @@
 # Performance Assessment
 
-[Project overview](../README.md) · [Platform overview](platform-overview.md) · [Validation and rollback](validation-and-rollback.md)
+[Owner decision brief](owner-decision-brief.md) · [Platform overview](platform-overview.md) · [Validation and rollback](validation-and-rollback.md)
 
-## Confirmed nightly incident
+## Strong evidence for the nightly incident mechanism
 
 The recurring severe slowdown around the nightly backup has a repeatable evidence chain:
 
@@ -14,7 +14,7 @@ The recurring severe slowdown around the nightly backup has a repeatable evidenc
 
 On the reviewed night, the DollForum dump occupied roughly 70 seconds and overlapped with approximately 300 slow PHP requests. Similar timing was present on earlier days.
 
-This supports a high-confidence conclusion: the backup is the initiating event and PHP-FPM is the waiting queue.
+This supports a high-confidence working conclusion: the backup is the initiating event and PHP-FPM is the waiting queue. A controlled capture of table-lock state during the backup remains necessary to demonstrate the lock path directly.
 
 ## What the evidence does not show
 
@@ -76,7 +76,7 @@ Targets should be set after the first clean baseline. Initial acceptance criteri
 
 ## Remediation direction
 
-The immediate backup response should preserve recoverability. The strategic path is:
+No database or backup change has been made under this project. The immediate response must preserve recoverability. The proposed path is:
 
 1. prove restore procedures;
 2. rehearse MyISAM-to-InnoDB conversion and full-text behavior;

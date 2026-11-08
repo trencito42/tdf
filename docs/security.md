@@ -1,6 +1,6 @@
 # Security Assessment
 
-[Project overview](../README.md) · [Implementation plan](implementation-plan.md) · [Validation and rollback](validation-and-rollback.md)
+[Owner decision brief](owner-decision-brief.md) · [Implementation plan](implementation-plan.md) · [Validation and rollback](validation-and-rollback.md)
 
 ## Assessment boundary
 
@@ -8,15 +8,17 @@ The review examined deployed versions, non-secret configuration, permissions, ap
 
 No finding in this document establishes that the platform has been compromised.
 
+No security remediation described here has been applied to production under this project.
+
 ## Priority findings
 
 ### S1 — Potential disclosure through web-served backup artifacts
 
 **Status:** confirmed placement; external retrieval open.
 
-Large backup artifacts exist within publicly served directory trees. One archive includes application configuration material. The vhost review did not identify a specific archive-deny rule. No HTTP retrieval test was performed because it could expose or transfer sensitive production data.
+Large backup artifacts exist within web-served directory trees. One archive includes application configuration material. The vhost review did not identify a specific archive-deny rule. External accessibility remains unverified because no HTTP retrieval test was performed.
 
-Operational consequence: if an archive is externally retrievable, it may disclose source, configuration and credentials. Containment should preserve the only valid copy, record hashes and determine whether an undocumented process depends on the current location. Credential rotation is required only after exposure/content scope is established, but the decision cannot be deferred indefinitely.
+Operational consequence: if an archive is externally retrievable, it may disclose source, configuration and credentials. Containment should preserve any unique recovery copy, record hashes and determine whether an undocumented process depends on the current location. Exposure assessment should determine whether credential rotation or incident response is necessary.
 
 ### S2 — phpBB authentication vulnerability
 
@@ -50,7 +52,7 @@ References: [PHP lifecycle](https://www.php.net/eol.php), [Drupal 7 end of life]
 
 Some primary sites are proxied through Cloudflare while DollForum and secondary hosts resolve directly to the shared origin. Cloudflare nameservers alone do not mean traffic is proxied. Direct origin records also reduce the effectiveness of protecting individual vhosts without server-wide origin controls.
 
-Before any change, export DNS, proxy state, TLS mode, WAF rules, bot controls, rate limits, cache rules and recent security events for every available zone. Origin restriction must account for Plesk, mail, certificate validation, staging and operational access.
+The next step is a read-only export of DNS, proxy state, TLS mode, WAF rules, bot controls, rate limits, cache rules and recent security events for every available zone. Any later origin restriction must account for Plesk, mail, certificate validation, staging and operational access and requires separate approval.
 
 ### S5 — Session and transport hardening
 

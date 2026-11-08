@@ -1,6 +1,6 @@
 # Platform Overview
 
-[Project overview](../README.md) · [Application inventory](application-inventory.md) · [Performance](performance.md)
+[Owner decision brief](owner-decision-brief.md) · [Application inventory](application-inventory.md) · [Performance](performance.md)
 
 ## Hosting model
 
@@ -57,7 +57,7 @@ These are control-panel accounting values, not the result of a new recursive sca
 
 One daily Plesk backup processes all domains, databases, mail/configuration data and selected content. The latest reviewed run completed successfully and Plesk validated its generated artifacts. That is useful evidence of backup creation, but it is not evidence that a complete application can be restored.
 
-The backup's database phase processes applications sequentially. DollForum's MyISAM dump is the confirmed source of its nightly lock queue. Other applications still share the database and storage load generated during the overall run.
+The backup's database phase processes applications sequentially. Repeated timing evidence strongly links DollForum's MyISAM dump to the nightly request queue; direct lock-state observation remains outstanding. Other applications still share the database and storage load generated during the overall run.
 
 ## Network and Cloudflare
 
@@ -67,7 +67,7 @@ CoverDoll, DollAlbum and DollHarem currently resolve through Cloudflare edge add
 - a proxied zone must not be assumed to have the same WAF, cache or bot policy as another;
 - direct records disclose the common origin, limiting the protection of proxied sites unless origin access is designed server-wide.
 
-Cloudflare dashboard configuration was not available during the assessment. DNS observations alone do not establish WAF or rate-limit behavior.
+Cloudflare dashboard configuration was not available during the assessment. DNS observations alone do not establish WAF, cache, bot or rate-limit behavior. A read-only per-zone export is therefore an open assessment item rather than a proposed configuration change.
 
 ## Shared change boundaries
 

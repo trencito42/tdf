@@ -1,6 +1,8 @@
 # Modernization Roadmap
 
-[Project overview](../README.md) · [Implementation plan](implementation-plan.md) · [Validation and rollback](validation-and-rollback.md)
+[Owner decision brief](owner-decision-brief.md) · [Implementation plan](implementation-plan.md) · [Validation and rollback](validation-and-rollback.md)
+
+This roadmap is proposed work. It records dependencies and sequencing; it does not indicate production approval or completion.
 
 ## Principles
 
@@ -14,7 +16,7 @@
 
 ## Phase 1 — Critical security containment
 
-Contain potentially exposed backup artifacts without destroying the only recoverable copy. Determine whether their contents or access history require credential rotation.
+After explicit approval, contain potentially exposed backup artifacts without destroying a unique recovery copy. Determine whether their contents or access history require credential rotation.
 
 Apply the phpBB vendor containment independently to DollForum and DollHarem, or accelerate a staged upgrade when containment side effects cannot be accepted. Validate database login, logout, remembered sessions, moderator access and administration behavior on each forum.
 
@@ -58,7 +60,7 @@ CoverDoll's mixed-engine Drupal database needs its own analysis. Existing InnoDB
 
 ## Phase 5 — Cloudflare and infrastructure hardening
 
-Export every Cloudflare zone before proposing changes. Standardize TLS and origin expectations per domain, then close direct-origin bypass only when Plesk, mail, staging and operational access are accounted for.
+Begin with an approved read-only export of every Cloudflare zone. Standardize TLS and origin expectations per domain only in a later approved package, then address direct-origin bypass when Plesk, mail, staging and operational access are accounted for.
 
 Prepare the current kernel and a controlled reboot with console rollback. Complete disk attribution, log retention and capacity alerting. Do not combine the reboot with an application upgrade unless a tested dependency requires it.
 
