@@ -2,11 +2,11 @@
 
 DollForum is a long-running community platform with roughly 2.9 million forum posts, 119,000 registered accounts and 1.5 million attachments. Its dedicated server also hosts DollHarem, DollAlbum, CoverDoll and several legacy or migration applications.
 
-This repository contains the engineering assessment and modernization plan for that shared environment. The work began after recurring periods of 30–60 second page loads and expanded beyond the main forum because the applications share database, backup, storage, web and operating-system services.
+This repository contains my technical assessment and proposed modernization plan for that shared environment. I performed the initial audit as the server administrator after recurring periods of 30–60 second page loads. The review expanded beyond the main forum because the applications share database, backup, storage, web and operating-system services.
 
 ## Start here
 
-Owners and senior administrators should begin with the [owner decision brief](docs/owner-decision-brief.md). It summarizes the evidence, the immediate decisions and the work that can be prepared without changing production.
+Owners should begin with the [owner decision brief](docs/owner-decision-brief.md). It summarizes the evidence, the immediate decisions and the work I can prepare and carry out once the appropriate approvals are in place.
 
 ## Current status
 
@@ -19,6 +19,8 @@ The initial server and application assessment is complete. Targeted verification
 - owner review of privileged forum accounts and legacy-data retention.
 
 No production remediation has been carried out under this project. No application upgrade, database conversion, PHP migration, DNS change, firewall change or reboot is approved by the documents in this repository.
+
+I will lead and perform the remediation as the existing server administrator. The owners are being asked to agree on priorities and approve scoped production changes, service interruptions and maintenance windows—not to hire or appoint a separate technical team.
 
 ## Main findings
 

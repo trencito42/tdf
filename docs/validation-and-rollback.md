@@ -4,7 +4,7 @@
 
 ## Change discipline
 
-Every production batch should have:
+For every approved production batch, the server administrator will maintain:
 
 1. an exact scope and owner approval;
 2. a captured pre-change state;

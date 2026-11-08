@@ -10,6 +10,8 @@ The dedicated server hosts more than the main forum. DollHarem has a second phpB
 
 The initial inventory and assessment are complete. Cloudflare dashboard review, external artifact accessibility, isolated restore testing and direct backup-lock observation remain open. No production remediation has been performed under this project.
 
+The existing server administrator will lead and perform the proposed work, preparing and testing changes before any approved production deployment. The owners are not being asked to hire a separate team; their role is to set priorities and approve scoped production changes, interruptions and maintenance windows.
+
 ## Security position
 
 The two production forums run phpBB 3.3.7 and 3.3.3. Both fall within a vulnerability range for which phpBB issued urgent guidance. The applicable temporary mitigation was not present at the time of review. Database authentication is selected, which narrows the active configuration, but does not remove the need for containment and upgrade.
@@ -61,7 +63,7 @@ Modernizing the current forum is more practical than rebuilding it. A rewrite wo
 
 ## Decision required
 
-Owners should consider four initial approvals independently:
+Owners should consider four initial permissions for the server administrator to proceed, each independently:
 
 1. controlled containment and exposure assessment for backup artifacts in served directories;
 2. separate emergency security containment for each phpBB forum;

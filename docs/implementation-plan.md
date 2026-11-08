@@ -4,9 +4,11 @@
 
 Every package is currently **proposed**. None has production approval or implementation status.
 
+The existing server administrator is responsible for preparing, testing and carrying out approved packages. This plan does not call for an outside engineering team. Owner approval controls priorities, production changes, service interruptions and maintenance windows.
+
 ## Initial owner approvals
 
-The first decisions are deliberately narrow and independent:
+The first decisions are deliberately narrow and independent. Each grants the server administrator permission to proceed only with the listed scope:
 
 - **A — WP-01:** controlled backup-artifact containment and exposure assessment.
 - **B — WP-02A/B:** separate emergency phpBB containment for DollForum and DollHarem.

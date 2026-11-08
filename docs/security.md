@@ -90,4 +90,4 @@ These controls reduce risk but do not cancel the priority findings.
 
 ## Publication note
 
-This repository intentionally omits the origin address, credentials, internal administrative URLs, raw logs and detailed exploit paths. The operational audit remains the controlled source for engineers executing approved work.
+This repository intentionally omits the origin address, credentials, internal administrative URLs, raw logs and detailed exploit paths. The operational audit remains the controlled source I will use as the server administrator when preparing and carrying out approved work.

@@ -4,6 +4,8 @@
 
 This roadmap is proposed work. It records dependencies and sequencing; it does not indicate production approval or completion.
 
+The existing server administrator will prepare and execute approved phases. Owners retain approval over priorities, production changes, service interruptions and maintenance windows; no separate technical team is being requested.
+
 ## Principles
 
 - Preserve content, accounts, permissions, URLs and staff workflows.
